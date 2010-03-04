@@ -37,4 +37,13 @@ public  class Supply
         }
         return name;
     }
+
+
+    public static boolean checkIfValidInput(String supplyName, String supplyType, String supplyQuantity){
+
+        if(supplyName.equals(null)||supplyType.equals("novalue")||supplyQuantity.equals(null)){
+            return false;
+        }
+        return true;
+    }
 }

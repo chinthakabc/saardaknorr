@@ -7,8 +7,8 @@
 
    if(v==false){
        %>
-       <jsp:include page="index.jsp"/>
        <center><br/>Please type a valid username or password.</center>
+       <jsp:include page="index.jsp"/>
        <%
    }else if(url==true){
        //Starts the session
@@ -23,7 +23,7 @@
        response.setHeader( "Connection", "close" );
    }else{
        %>
-       <jsp:include page="index.jsp"/>
        <center><br/>Invalid username or password.</center>
+       <jsp:include page="index.jsp"/>
        <%}
 %>

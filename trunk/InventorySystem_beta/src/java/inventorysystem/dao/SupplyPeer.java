@@ -69,12 +69,12 @@ public class SupplyPeer
         }
     }
 
-    public static boolean addSupply(String supplyName, String supplyType, String supplyQuantity, String supplySource, String supplyLocation){
+    public static boolean addNewSupply(String supplyName, String supplyType, int supplyQuantity, String supplySource, String supplyLocation){
 
         Criteria criteria = new Criteria();
         criteria.add(SupplyPeer.NAME, supplyName);
         criteria.add(SupplyPeer.TYPE, supplyType);
-        criteria.add(SupplyPeer.QUANTITY, Integer.parseInt(supplyQuantity));
+        criteria.add(SupplyPeer.QUANTITY, supplyQuantity);
         criteria.add(SupplyPeer.SOURCE, supplySource);
         criteria.add(SupplyPeer.LOCATION, supplyLocation);
 
@@ -86,6 +86,7 @@ public class SupplyPeer
             return false;
         }
     }
+
 
          public static boolean deleteSupply(String supplyName){
         Criteria criteria = new Criteria();

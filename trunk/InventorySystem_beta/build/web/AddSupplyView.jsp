@@ -107,16 +107,16 @@ Released   : 20090617
 <center>
 <h2>Add Supply</h2>
 <br/>
-<form method="post" action="AddSupplyController.jsp">
+<form method="post" action="AddSupplyView2.jsp">
     <table>
         <tr><td>Supply Name:</td><td><input type="text" name="sname"/><b>*</b></td></tr>
-        <tr><td>Supply Type:</td><td><select name="supply_type" class="pretext2" id = "input2">
+        <tr><td>Supply Type:</td><td><select name="supplytype" class="pretext2" id = "input2">
                     <option value="novalue">[select one]</option>
-                    <option value="reagent">Reagent</option>
-                    <option value="apparatus">Apparatus</option></select><b>*</b></td></tr>
+                    <option value="Reagent">Reagent</option>
+                    <option value="Apparatus">Apparatus</option></select><b>*</b></td></tr>
         <tr><td>Quantity:</td><td><input type="text" name="quantity"/><b>*</b></td></tr>
         <tr><td>Source:</td><td><input type="text" name="source"/></td></tr>
-        <<tr><td>Location:</td><td><select name="location" class="pretext2" id = "input2">
+        <tr><td>Location:</td><td><select name="location" class="pretext2" id = "input2">
                     <option value="novalue">[select one]</option>
                     <option value="General Chemistry and Chemical Education">General Chemistry and Chemical Education</option>
                     <option value="Biochemistry and Agricultural Chemistry">Biochemistry and Agricultural Chemistry</option>
