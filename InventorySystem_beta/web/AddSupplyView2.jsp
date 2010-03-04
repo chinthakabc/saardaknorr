@@ -13,14 +13,16 @@ Released   : 20090617
 <%
    String supplyname=request.getParameter("sname");
    String type=request.getParameter("supplytype");
-   String quantity2=request.getParameter("quantity");
-        if(inventorysystem.dao.Supply.checkIfValidInput(supplyname, type, quantity2)==false){
+   String quantity=request.getParameter("quantity");
+        if(inventorysystem.dao.Supply.checkIfValidInput(supplyname, type, quantity)==false){
            %>
            <center>Please enter valid inputs.</center>
-           <jsp:include page="IssueORFView.jsp"/>
+           <jsp:include page="AddSupplyView.jsp"/>
            <%
         }
 %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -116,33 +118,22 @@ Released   : 20090617
     java.util.List supplies = inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
 %>
 <center>
-<h2>Issue Order Request Form</h2>
+<h2>Add Supply</h2>
 <br/>
-<form method="post" action="IssueORFController.jsp">
+<form method="post" action="AddSupplyController.jsp">
     <table>
-        <tr><td>
-                Supply Name:</td><td><input type="text" name="sname" value="<%=request.getParameter("sname")%>" readonly="true"/>
-        </td></tr>
-        <tr><td>
-        Supply Type:</td><td><input type="text" name="supply_type" value="<%=request.getParameter("supplytype")%>" readonly="true"/>
-        </td></tr>
-        <tr><td>
-        Quantity:</td><td><input type="text" name="quantity" value="<%=request.getParameter("quantity")%>" readonly="true"/>
-        </td></tr>
-        <tr><td>
-                <%  String quantity=(String) request.getParameter("quantity");
-                    String price=(String) request.getParameter("price");
-                    int total=Integer.parseInt(quantity)*Integer.parseInt(price);
-                %>
-        Amount Price per Unit:</td><td><input type="text" name="price" value="<%=price%>" readonly="true"/>
-        </td></tr>
-        <tr><td>
-            Total:</td><td><input type="text" name="total" value="<%=total%>" readonly="true"/>
-        </td></tr>
+        <tr><td>Supply Name:</td><td><input type="text" name="sname" value="<%=request.getParameter("sname")%>" readonly="true"/></td></tr>
+        <tr><td>Supply Type:</td><td><input type="text" name="supplytype" value="<%=request.getParameter("supplytype")%>" readonly="true"/></td></tr>
+        <tr><td>Quantity:</td><td><input type="text" name="quantity" value="<%=request.getParameter("quantity")%>" readonly="true"/></td></tr>
+        <tr><td>Source:</td><td><input type="text" name="source" value="<%=request.getParameter("source")%>" readonly="true"/></td></tr>
+        <tr><td>Location:</td><td><input type="text" name="location" value="<%=request.getParameter("location")%>" readonly="true"/></td></tr>
+    <br/>
     </table>
-    <br/>Confirm Add?<br/>
-    <input type="submit" value="Yes" name="confirm"/>
-    <input type="submit" value="No" name="confirm"/>
+    <br/>
+    Confirm Add?
+    <br/>
+    <input type="submit" name="confirm" value="Yes"/>
+    <input type="submit" name="confirm" value="No"/>
 </form>
 </center>
 		</div>

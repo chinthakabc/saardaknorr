@@ -10,6 +10,17 @@ Version    : 1.0
 Released   : 20090617
 
 -->
+<%
+   String supplyname=request.getParameter("sname");
+   String type=request.getParameter("supplytype");
+   String quantity2=request.getParameter("quantity");
+        if(inventorysystem.dao.Supply.checkIfValidInput(supplyname, type, quantity2)==false){
+           %>
+           <center>Please enter valid inputs.</center>
+           <jsp:include page="IssueORFView.jsp"/>
+           <%
+        }
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />

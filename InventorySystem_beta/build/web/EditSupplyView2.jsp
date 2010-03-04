@@ -105,7 +105,7 @@ Released   : 20090617
 <% String supply=inventorysystem.dao.Supply.splitSupplyInfo(request.getParameter("supplies"));
    inventorysystem.dao.Supply supplyEdit=(inventorysystem.dao.Supply) inventorysystem.dao.SupplyPeer.retrieveSupply(supply);%>
 <center>
-<form method="post" action="EditSupplyController.jsp">
+<form method="post" action="EditSupplyView3.jsp">
     <table>
         <tr><td>Supply Name:</td><td><input type="text" name="sname" value="<%=supplyEdit.getName()%>" /></td></tr>
         <tr><td>Supply Type:</td><td><input type="text" name="type" value="<%=supplyEdit.getType()%>" /></td></tr>
