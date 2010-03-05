@@ -106,6 +106,8 @@ Released   : 20090617
         <%
             if(request.getParameter("success")!=null && request.getParameter("success").equals("1")){
                 out.println("Status successfully updated!");
+            }else if(request.getParameter("fail")!=null && request.getParameter("fail").equals("1")){
+                out.println("Status update failed!");
             }
             if(request.getParameter("nagsearch")==null || (request.getParameter("nagsearch")!=null && request.getParameter("nagsearch").equals("1"))){
         %>
@@ -130,14 +132,14 @@ Released   : 20090617
             %>
             <br/><%
             out.println(sDiv);
-            boolean stuff=false;
-            if(stat.equalsIgnoreCase("true")) stuff=true;
+            boolean userState=false;
+            if(stat.equalsIgnoreCase("true")) userState=true;
             %>
             <tr>
                 <td>
                 Status:&nbsp;<select name="statusChange">
-                    <option value="true" <% if(stuff){%> selected<%}%>>true</option>
-                    <option value="false" <% if(!stuff){%> selected<%}%>>false</option>
+                    <option value="true" <% if(userState){%> selected<%}%>>true</option>
+                    <option value="false" <% if(!userState){%> selected<%}%>>false</option>
                 </select>
                 </td>
             </tr>
@@ -148,7 +150,7 @@ Released   : 20090617
                 <input type="submit" value="Change Status" name="button"/>
                 </td>
                 <td>
-                    <input type="submit" value="Cancel" name="button"/>
+                    <input type="submit" value="Cancel " name="button"/>
                 </td>
             </tr>
 <%
