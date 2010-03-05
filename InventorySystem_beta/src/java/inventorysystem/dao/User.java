@@ -52,6 +52,12 @@ public  class User extends inventorysystem.dao.BaseUser implements Persistent
         return false;
     }
 
+    public String returnState()
+    {
+        Boolean v = this.getState();
+        return v.toString();
+    }
+
     public String returnStatus()
     {
         Boolean v = this.getStatus();
