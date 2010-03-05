@@ -96,6 +96,12 @@
 			required="true"
 			type="BOOLEANINT"
 			description="Status"/>
+                <column
+			name="state"
+			javaName="State"
+			required="true"
+			type="BOOLEANINT"
+			description="State"/>
 	</table>
        
         <table name="supply" javaName="Supply" description="Supply">
