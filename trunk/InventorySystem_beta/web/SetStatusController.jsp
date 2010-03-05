@@ -7,23 +7,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-
 <%
 if(request.getParameter("button").equals("Cancel")){
-%> <jsp:forward page="index.jsp"/><%
+%> <jsp:forward page="main.jsp"/><%
+}else if(request.getParameter("button").equals("Cancel ")){
+    %> <jsp:forward page="SetUserStatusView.jsp"/><%
 }else if(request.getParameter("button").equals("Change Status")){
-    boolean a=false;
-    String stat = request.getParameter("statusChange");
-    String chUser = request.getParameter("userChange");
+    boolean a=true;
+    String stat = request.getParameter("statusChange"); //value from the select
+    String uName = request.getParameter("userChange");
     if(stat.equalsIgnoreCase("true")){
-        a=inventorysystem.dao.UserPeer.activateUser(chUser);
+        a=inventorysystem.dao.UserPeer.stateUser(uName);
     }else if(stat.equalsIgnoreCase("false")){
-        a=inventorysystem.dao.UserPeer.deactivateUser(chUser);
+        a=inventorysystem.dao.UserPeer.deStateUser(uName);
     }
     if(a){
 %> <jsp:forward page="SetUserStatusView.jsp">
     <jsp:param name="success" value="1"/>
-</jsp:forward>
+    </jsp:forward>
 <%
     }else{
         %>
@@ -42,7 +43,7 @@ if(request.getParameter("button").equals("Cancel")){
     <jsp:forward page="SetUserStatusView.jsp">
         <jsp:param name="searchUser" value="<%=someUser.getUserName()%>"/>
         <jsp:param name="searchDiv" value="<%=someUser.getDivision()%>"/>
-        <jsp:param name="searchStat" value="<%=someUser.returnStatus()%>"/>
+        <jsp:param name="searchStat" value="<%=someUser.returnState()%>"/>
         <jsp:param name="nagsearch" value="0"/>
     </jsp:forward>
 
