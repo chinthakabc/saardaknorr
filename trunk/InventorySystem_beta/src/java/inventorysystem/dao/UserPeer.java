@@ -112,6 +112,39 @@ public class UserPeer extends inventorysystem.dao.BaseUserPeer {
 
         try{
             UserPeer.doUpdate(selectCriteria, criteria);
+            return true; 
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+ public static boolean stateUser(String username){
+        Criteria selectCriteria = new Criteria();
+        selectCriteria.add(UserPeer.USERNAME, username);
+
+        Criteria criteria = new Criteria();
+        criteria.add(UserPeer.STATE, true);
+
+        try{
+            UserPeer.doUpdate(selectCriteria, criteria);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean deStateUser(String username) throws Exception{
+        Criteria selectCriteria = new Criteria();
+        selectCriteria.add(UserPeer.USERNAME, username);
+        User n = (User)UserPeer.doSelect(selectCriteria).get(0);
+
+        Criteria criteria = new Criteria();
+        criteria.add(UserPeer.STATE, false);
+
+        try{
+            UserPeer.doUpdate(selectCriteria, criteria);
             return true;
         }catch(Exception e){
             e.printStackTrace();
