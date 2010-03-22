@@ -8,7 +8,7 @@ Name       : Everyday Series
 Description: A three-column, fixed-width blog design.
 Version    : 1.0
 Released   : 20090617
-
+dfrtcdfvd
 -->
 <%
    String s= (String) session.getAttribute("username");
