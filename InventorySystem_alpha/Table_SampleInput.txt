@@ -1,0 +1,69 @@
+
+=============== Dummy Accounts =====================
+
+insert into User values(1,'123456789','Jenneth','Parco' ,'Jusay', 'jennethjusay', 'password', 09179645941 ,'General Chemistry and Chemical Education', 'admin', 1, 1);
+
+insert into User values(User_ID,'124456789','Xerez','Vailoces' ,'Hernandez', 'xerezhernandez', 'password',09179645941 ,'Biochemistry and Agricultural Chemistry', 'user', 0, 1);
+
+insert into User values(User_ID,'125456789','Regine','Tolentino' ,'Mendoza', 'reginemendoza', 'password', 09179645941,'Physical and Inorganic Chemistry', 'admin', 1, 1);
+
+insert into User values(User_ID,'126456789','Marcel','Marci' ,'Sarcia', 'marcelsarcia', 'password', 09179645941,'Analytical and Environmental Chemistry', 'user', 0, 1);
+
+insert into User values(User_ID,'127456789','Ray','Rosario' ,'Santos', 'raysantos', 'password', 09179645941,'Organic Chemistry and Natural Products', 'user', 1, 1);
+
+insert into supply_genchem values(1,'apparatus','erlenmeyer flask',1, 50,'Milliliter/s');
+insert into supply_biochem values(supply_id,'reagent','calcium chloride',5, 500 , 'Gram/s');
+insert into supply_phychem values(supply_id,'apparatus','glass funnel',2,NULL,NULL);
+insert into supply_anachem values(supply_id,'reagent','potassium chlorate',1, 100, 'Gram/s');
+
+***********************************
+sample supplies/materials
+***********************************
+
+REAGENTS:
+
+sodium carbonate
+calcium chloride
+ammonium nitrate
+potassium chlorate
+manganese dioxide
+copper turnings
+granulated zinc
+sodium hydroxide solution
+sulfuric acid solution
+nitric acid solution
+sulfur
+bromine
+sodium chloride
+sodium nitrite
+ethanol
+copper sulfate
+ferrous sulfide
+
+
+
+=====================================================================
+APPARATUS:
+
+test tube
+test tube holder
+beaker
+buret
+erlenmeyer flask
+volumetric flask
+evaporating dish
+crucible
+conductivity apparatus
+pipet
+filter paper
+glass funnel
+glass stirring rod
+watchglass
+graduated cylinder
+balance
+burner
+centrifuge
+fumehood
+thermometer
+
+
