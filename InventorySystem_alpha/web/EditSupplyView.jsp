@@ -114,12 +114,25 @@ Released   : 20090617
     <%
     String st = (String) session.getAttribute("status");
     String dv = (String) session.getAttribute("division");
+    
     java.util.List supplies3 = null;
+    java.util.List supplies4 = null;
+    java.util.List supplies5 = null;
+    java.util.List supplies6 = null;
+    java.util.List supplies7 = null;
+
     if(st.equals("user")){
         if(dv.equals("General Chemistry and Chemical Education")){
             supplies3 = inventorysystem.dao.Supply_GenChemPeer.retrieveAllSupplies();
             if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
             }
             %>
             <h3>General Chemistry and Chemical Education</h3>
@@ -157,7 +170,14 @@ Released   : 20090617
         }else if (dv.equals("Biochemistry and Agricultural Chemistry")){
             supplies3 = inventorysystem.dao.Supply_BioChemPeer.retrieveAllSupplies();
             if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
+                            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
             }
             %>
             <h3>Biochemistry and Agricultural Chemistry</h3>
@@ -195,7 +215,14 @@ Released   : 20090617
         }else if(dv.equals("Physical and Inorganic Chemistry")){
             supplies3 = inventorysystem.dao.Supply_PhyChemPeer.retrieveAllSupplies();
             if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
+                            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
             }
             %>
             <h3>Physical and Inorganic Chemistry</h3>
@@ -233,7 +260,14 @@ Released   : 20090617
         }else if(dv.equals("Analytical and Environmental Chemistry")){
             supplies3 = inventorysystem.dao.Supply_AnaChemPeer.retrieveAllSupplies();
             if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
+                            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
             }
             %>
             <h3>Analytical and Environmental Chemistry</h3>
@@ -271,7 +305,14 @@ Released   : 20090617
         }else{
             supplies3 = inventorysystem.dao.Supply_OrgChemPeer.retrieveAllSupplies();
             if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
+                            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
             }
             %>
             <h3>Organic Chemistry and Natural Products</h3>
@@ -320,17 +361,26 @@ Released   : 20090617
     </tr>
                 <%
                 supplies3 = inventorysystem.dao.Supply_GenChemPeer.retrieveAllSupplies();
-                if (supplies3.isEmpty()){
-                    out.println("There are no supplies yet.");
+                supplies4 = inventorysystem.dao.Supply_OrgChemPeer.retrieveAllSupplies();
+                supplies5 = inventorysystem.dao.Supply_PhyChemPeer.retrieveAllSupplies();
+                supplies6 = inventorysystem.dao.Supply_AnaChemPeer.retrieveAllSupplies();
+                supplies7 = inventorysystem.dao.Supply_BioChemPeer.retrieveAllSupplies();
+             if (supplies3.isEmpty()&&supplies4.isEmpty()&&supplies5.isEmpty()&&supplies6.isEmpty()&&supplies7.isEmpty()){
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
                 }
                 for(int i=0; i<supplies3.size(); i++)
                 {
                     inventorysystem.dao.Supply_GenChem supplyList = (inventorysystem.dao.Supply_GenChem)supplies3.get(i);
                     %>
                     <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
+                    <td><input type="radio" name="supplies" value="<%=supplyList%>|genchem"/>
                     <%=supplyList.getName()%>
                     </td>
                     <td>
@@ -343,13 +393,113 @@ Released   : 20090617
                         <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
                     </td>
                     <td>
+                        <input type="hidden" name="location" value="genchem"/>
                         General Chemistry and Chemical Education
+                    </td>
+                    </tr>
+                <%}
+                for(int i=0; i<supplies4.size(); i++)
+                {
+                    inventorysystem.dao.Supply_OrgChem supplyList = (inventorysystem.dao.Supply_OrgChem)supplies4.get(i);
+                    %>
+                    <tr>
+                    <%
+                    %>
+                    <td><input type="radio" name="supplies" value="<%=supplyList%>|orgchem"/>
+                    <%=supplyList.getName()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getType()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getQuantity()%>
+                    </td>
+                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
+                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
+                    </td>
+                    <td>
+                        <input type="hidden" name="location" value="orgchem"/>
+                        Organic Chemistry and Natural Products
+                    </td>
+                    </tr>
+                    <%}
+                    for(int i=0; i<supplies5.size(); i++)
+                    {
+                    inventorysystem.dao.Supply_PhyChem supplyList = (inventorysystem.dao.Supply_PhyChem)supplies5.get(i);
+                    %>
+                    <tr>
+                    <%
+                    %>
+                    <td><input type="radio" name="supplies" value="<%=supplyList%>|phychem"/>
+                    <%=supplyList.getName()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getType()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getQuantity()%>
+                    </td>
+                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
+                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
+                    </td>
+                    <td>
+                        <input type="hidden" name="location" value="phychem"/>
+                        Physical and Inorganic Chemistry
+                    </td>
+                    </tr>
+                    <%}
+                    for(int i=0; i<supplies6.size(); i++)
+                    {
+                    inventorysystem.dao.Supply_AnaChem supplyList = (inventorysystem.dao.Supply_AnaChem)supplies6.get(i);
+                    %>
+                    <tr>
+                    <%
+                    %>
+                    <td><input type="radio" name="supplies" value="<%=supplyList%>|anachem"/>
+                    <%=supplyList.getName()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getType()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getQuantity()%>
+                    </td>
+                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
+                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
+                    </td>
+                    <td>
+                        <input type="hidden" name="location" value=anachem"/>
+                        Analytical and Environmental Chemistry
+                    </td>
+                    </tr>
+                    <%}
+                    for(int i=0; i<supplies7.size(); i++)
+                    {
+                    inventorysystem.dao.Supply_BioChem supplyList = (inventorysystem.dao.Supply_BioChem)supplies7.get(i);
+                    %>
+                    <tr>
+                    <%
+                    %>
+                    <td><input type="radio" name="supplies" value="<%=supplyList%>|biochem"/>
+                    <%=supplyList.getName()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getType()%>
+                    </td>
+                    <td>
+                    <%=supplyList.getQuantity()%>
+                    </td>
+                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
+                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
+                    </td>
+                    <td>
+                        <input type="hidden" name="location" value="biochem"/>
+                        Biochemistry and Agricultural Chemistry
                     </td>
                     </tr>
                     <%}%>
                     </table>
 <%}%>
-
                     <br/><br/>
                     <input type="submit" name="button" value="Edit Supply"/>
  </center>

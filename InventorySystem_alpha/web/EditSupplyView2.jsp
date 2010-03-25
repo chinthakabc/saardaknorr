@@ -108,216 +108,68 @@ Released   : 20090617
 		<div id="content">
                     <p align="right">
                         <a href="main.jsp"><img src="home_button.jpg" height="50" title="Home"></img></a> <a href="LogoutController.jsp"><img src="delete.png" height="35" title="Logout"></img></a></p>
+<center>
 <%
     String dv= (String) session.getAttribute("division");
     String st= (String) session.getAttribute("status");
     java.util.List supplies3 = null;
     if(st.equals("admin")){
         String supply=request.getParameter("supplies");
-        out.print(supply);
-        inventorysystem.dao.Supply supplyEdit=(inventorysystem.dao.Supply) inventorysystem.dao.SupplyPeer.retrieveSupply(supply);
-    }else{
-        if(dv.equals("General Chemistry and Chemical Education")){
-            supplies3 = inventorysystem.dao.Supply_GenChemPeer.retrieveAllSupplies();
-            if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
-            }
-            %>
-            <h3>General Chemistry and Chemical Education</h3>
-            <table border="1" cellpadding="2">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Type</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Unit of Issue</b></td>
-            </tr>
-                <%
-                for(int i=0; i<supplies3.size(); i++)
-                {
-                    inventorysystem.dao.Supply_GenChem supplyList = (inventorysystem.dao.Supply_GenChem)supplies3.get(i);
-                    %>
-                    <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
-                    <%=supplyList.getName()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getType()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getQuantity()%>
-                    </td>
-                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
-                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
-                    </td>
-                    </tr>
-                <%}%>
-                </table>
-        <%
-        }else if (dv.equals("Biochemistry and Agricultural Chemistry")){
-            supplies3 = inventorysystem.dao.Supply_BioChemPeer.retrieveAllSupplies();
-            if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
-            }
-            %>
-            <h3>Biochemistry and Agricultural Chemistry</h3>
-            <table border="1" cellpadding="2">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Type</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Unit of Issue</b></td>
-            </tr>
-                <%
-                for(int i=0; i<supplies3.size(); i++)
-                {
-                    inventorysystem.dao.Supply_BioChem supplyList = (inventorysystem.dao.Supply_BioChem)supplies3.get(i);
-                    %>
-                    <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
-                    <%=supplyList.getName()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getType()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getQuantity()%>
-                    </td>
-                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
-                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
-                    </td>
-                    </tr>
-                <%}%>
-                </table>
-        <%
-        }else if(dv.equals("Physical and Inorganic Chemistry")){
-            supplies3 = inventorysystem.dao.Supply_PhyChemPeer.retrieveAllSupplies();
-            if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
-            }
-            %>
-            <h3>Physical and Inorganic Chemistry</h3>
-            <table border="1" cellpadding="2">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Type</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Unit of Issue</b></td>
-            </tr>
-                <%
-                for(int i=0; i<supplies3.size(); i++)
-                {
-                    inventorysystem.dao.Supply_PhyChem supplyList = (inventorysystem.dao.Supply_PhyChem)supplies3.get(i);
-                    %>
-                    <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
-                    <%=supplyList.getName()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getType()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getQuantity()%>
-                    </td>
-                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
-                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
-                    </td>
-                    </tr>
-                <%}%>
-                </table>
-        <%
-        }else if(dv.equals("Analytical and Environmental Chemistry")){
-            supplies3 = inventorysystem.dao.Supply_AnaChemPeer.retrieveAllSupplies();
-            if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
-            }
-            %>
-            <h3>Analytical and Environmental Chemistry</h3>
-            <table border="1" cellpadding="2">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Type</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Unit of Issue</b></td>
-            </tr>
-                <%
-                for(int i=0; i<supplies3.size(); i++)
-                {
-                    inventorysystem.dao.Supply_AnaChem supplyList = (inventorysystem.dao.Supply_AnaChem)supplies3.get(i);
-                    %>
-                    <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
-                    <%=supplyList.getName()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getType()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getQuantity()%>
-                    </td>
-                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
-                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
-                    </td>
-                    </tr>
-                <%}%>
-                </table>
-        <%
+        String[] r=supply.split("\\|");
+        String location=r[1];
+        String r0=inventorysystem.dao.Supply_GenChem.splitSupplyInfo(r[0]);
+        String sname=null, type=null, unit=null, amount=null;
+        int quantity=0;
+
+        //out.print(supply);
+        if(r[1].equals("genchem")){
+            inventorysystem.dao.Supply_GenChem supplyEdit=(inventorysystem.dao.Supply_GenChem) inventorysystem.dao.Supply_GenChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(r[1].equals("orgchem")){
+            inventorysystem.dao.Supply_OrgChem supplyEdit=(inventorysystem.dao.Supply_OrgChem) inventorysystem.dao.Supply_OrgChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(r[1].equals("phychem")){
+            inventorysystem.dao.Supply_PhyChem supplyEdit=(inventorysystem.dao.Supply_PhyChem) inventorysystem.dao.Supply_PhyChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(r[1].equals("biochem")){
+            inventorysystem.dao.Supply_BioChem supplyEdit=(inventorysystem.dao.Supply_BioChem) inventorysystem.dao.Supply_BioChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
         }else{
-            supplies3 = inventorysystem.dao.Supply_OrgChemPeer.retrieveAllSupplies();
-            if (supplies3.isEmpty()){
-                out.println("There are no supplies yet.");
-            }
-            %>
-            <h3>Organic Chemistry and Natural Products</h3>
-            <table border="1" cellpadding="2">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Type</b></td>
-                <td><b>Quantity</b></td>
-                <td><b>Unit of Issue</b></td>
-            </tr>
-                <%
-                for(int i=0; i<supplies3.size(); i++)
-                {
-                    inventorysystem.dao.Supply_OrgChem supplyList = (inventorysystem.dao.Supply_OrgChem)supplies3.get(i);
-                    %>
-                    <tr>
-                    <%
-                    %>
-                    <td><input type="radio" name="supplies" value="<%=supplyList%>"/>
-                    <%=supplyList.getName()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getType()%>
-                    </td>
-                    <td>
-                    <%=supplyList.getQuantity()%>
-                    </td>
-                    <td><%String noval="novalue"; if(supplyList.getAmount() == "" || supplyList.getAmount() == null){out.print("");} else{ out.print(supplyList.getAmount()); }%>&nbsp;
-                        <% if((supplyList.getUnit() == null) || (supplyList.getUnit().equals(noval))){out.print("");} else{ out.print(supplyList.getUnit()); }%>
-                    </td>
-                    </tr>
-                <%}%>
-                </table>
-        <%
+            inventorysystem.dao.Supply_AnaChem supplyEdit=(inventorysystem.dao.Supply_AnaChem) inventorysystem.dao.Supply_AnaChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+
+            out.print(sname);
+            out.print(type);
+            out.print(quantity);
+            out.print(unit);
+            out.print(amount);
         }
-    }
 %>
-<center>
-<form method="post" action="EditSupplyView3.jsp">
+    <form method="post" action="EditSupplyController.jsp">
     <table>
-        <tr><td>Supply Name:</td><td><input type="text" name="sname" value="<%=supplyEdit.getName()%>" /></td></tr>
-        <tr><td>Supply Type:</td><td><input type="text" name="type" value="<%=supplyEdit.getType()%>" /></td></tr>
-        <% int qty = supplyEdit.getQuantity();%>
-        <input type="hidden" name="prev_qty" value="<%=qty%>"/>
-        <tr><td>Quantity:</td><td><input type="text" name="quantity" value="<%=supplyEdit.getQuantity()%>" /></td></tr>
+        <tr><td>Supply Name:</td><td><input type="text" name="sname" value="<%=sname%>" /></td></tr>
+        <tr><td>Supply Type:</td><td><input type="text" name="type" value="<%=type%>" /></td></tr>
+        <tr><td>Quantity:</td><td><input type="text" name="quantity" value="<%=quantity%>" /></td></tr>
         <tr><td>Action Taken:</td>
             <td>
                 <select name="action" >
@@ -330,25 +182,24 @@ Released   : 20090617
                 </select>
             </td>
         </tr>
-        <tr><td>Unit:</td><td><input type="text" name="amount" value="<%String noval="novalue"; if(supplyEdit.getAmount() == "" || supplyEdit.getAmount() == null){out.print("");} else{ out.print(supplyEdit.getAmount()); }%>" />
-
-                 <select name="unit">
+        <tr><td>Unit:</td><td><input type="text" name="amount" size="4" value="<%if(amount==null){out.print("N/A");}else{out.print(amount);}%>" />
+        <select name="unit">
                    <%try{%>
                    <%
                         String novalue= "novalue";
-                        if(supplyEdit.getUnit() == null || (supplyEdit.getUnit().equals(novalue))){
+                        if(unit == null || (unit.equals(novalue))){
                    %>
-                   <option value="novalue" selected>[select one]</option>
+                   <option value="novalue" selected>N/A</option>
                     <%}
                       }
                       catch(Exception e)
                       {%>
-                      <option value="novalue">[select one]</option>
+                      <option value="novalue">N/A</option>
                       <%}%>
 
                       <%try{%>
                       <%
-                        if(supplyEdit.getUnit().equals("Gram/s")){
+                        if(unit.equals("Gram/s")){
                    %>
                    <option value="Gram/s" selected>Gram/s</option>
                     <%}
@@ -360,7 +211,7 @@ Released   : 20090617
 
                     <%try{%>
                       <%
-                        if(supplyEdit.getUnit().equals("Kilogram/s")){
+                        if(unit.equals("Kilogram/s")){
                    %>
                    <option value="Kilogram/s" selected>Kilogram/s</option>
                     <%}
@@ -372,7 +223,7 @@ Released   : 20090617
 
                     <%try{%>
                     <%
-                        if(supplyEdit.getUnit().equals("Milliliter/s")){
+                        if(unit.equals("Milliliter/s")){
                    %>
                    <option value="Milliliter/s" selected>Milliliter/s</option>
                     <%}
@@ -384,7 +235,7 @@ Released   : 20090617
 
                     <%try{%>
                     <%
-                        if(supplyEdit.getUnit().equals("Liter/s")){
+                        if(unit.equals("Liter/s")){
                    %>
                    <option value="Liter/s" selected>Liters</option>
                     <%}
@@ -393,10 +244,9 @@ Released   : 20090617
                       {%>
                       <option value="Liter/s">Liters</option>
                     <%}%>
-
                     <%try{%>
                     <%
-                        if(supplyEdit.getUnit().equals("Gallon/s")){
+                        if(unit.equals("Gallon/s")){
                    %>
                    <option value="Gallon/s" selected>Gallon/s</option>
                     <%}
@@ -405,13 +255,12 @@ Released   : 20090617
                       {%>
                       <option value="Gallon/s">Gallon/s</option>
                     <%}%>
-            
-                </select>       
+                </select>
         </td></tr>
         <tr><td>Location:</td><td>
             <select name="location">
                    <%
-                        if(supplyEdit.getLocation() == "novalue"){
+                        if(location == "novalue"){
                    %>
                    <option value="novalue" selected>[select one]</option>
                     <%}
@@ -421,7 +270,7 @@ Released   : 20090617
                     <%}%>
 
                     <%
-                        if(supplyEdit.getLocation().equals("General Chemistry and Chemical Education")){
+                        if(location.equals("genchem")){
                    %>
                    <option value="General Chemistry and Chemical Education" selected>General Chemistry and Chemical Education</option>
                     <%}
@@ -431,7 +280,7 @@ Released   : 20090617
                     <%}%>
 
                     <%
-                        if(supplyEdit.getLocation().equals("Biochemistry and Agricultural Chemistry")){
+                        if(location.equals("biochem")){
                    %>
                    <option value="Biochemistry and Agricultural Chemistry" selected>Biochemistry and Agricultural Chemistry</option>
                     <%}
@@ -441,7 +290,7 @@ Released   : 20090617
                     <%}%>
 
                     <%
-                        if(supplyEdit.getLocation().equals("Physical and Inorganic Chemistry")){
+                        if(location.equals("phychem")){
                    %>
                    <option value="Physical and Inorganic Chemistry" selected>Physical and Inorganic Chemistry</option>
                     <%}
@@ -451,7 +300,7 @@ Released   : 20090617
                     <%}%>
 
                     <%
-                        if(supplyEdit.getLocation().equals("Analytical and Environmental Chemistry")){
+                        if(location.equals("anachem")){
                    %>
                    <option value="Analytical and Environmental Chemistry" selected>Analytical and Environmental Chemistry</option>
                     <%}
@@ -461,19 +310,157 @@ Released   : 20090617
                     <%}%>
 
                     <%
-                        if(supplyEdit.getLocation().equals("Organic Chemistry and Natural Products")){
+                        if(location.equals("orgchem")){
                    %>
                    <option value="Organic Chemistry and Natural Products" selected>Organic Chemistry and Natural Products</option>
                     <%}
                       else
                       {%>
                        <option value="Organic Chemistry and Natural Products">Organic Chemistry and Natural Products</option>
+                    <%}
+    }else{
+        String supply=request.getParameter("supplies");
+        String r0=inventorysystem.dao.Supply_GenChem.splitSupplyInfo(supply);
+        String sname=null, type=null, unit=null, amount=null;
+        int quantity=0;
+
+        if(dv.equals("General Chemistry and Chemical Education")){
+            inventorysystem.dao.Supply_GenChem supplyEdit=(inventorysystem.dao.Supply_GenChem) inventorysystem.dao.Supply_GenChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(dv.equals("Organic Chemistry and Natural Products")){
+            inventorysystem.dao.Supply_OrgChem supplyEdit=(inventorysystem.dao.Supply_OrgChem) inventorysystem.dao.Supply_OrgChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(dv.equals("Physical and Inorganic Chemistry")){
+            inventorysystem.dao.Supply_PhyChem supplyEdit=(inventorysystem.dao.Supply_PhyChem) inventorysystem.dao.Supply_PhyChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else if(dv.equals("Biochemistry and Agricultural Chemistry")){
+            inventorysystem.dao.Supply_BioChem supplyEdit=(inventorysystem.dao.Supply_BioChem) inventorysystem.dao.Supply_BioChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }else{
+            inventorysystem.dao.Supply_AnaChem supplyEdit=(inventorysystem.dao.Supply_AnaChem) inventorysystem.dao.Supply_AnaChemPeer.retrieveSupply(r0);
+            sname= supplyEdit.getName();
+            type= supplyEdit.getType();
+            quantity= supplyEdit.getQuantity();
+            unit= supplyEdit.getUnit();
+            amount= supplyEdit.getAmount();
+        }%>
+
+    <form method="post" action="EditSupplyController.jsp">
+    <table>
+        <tr><td>Supply Name:</td><td><input type="text" name="sname" value="<%=sname%>" /></td></tr>
+        <tr><td>Supply Type:</td><td><input type="text" name="type" value="<%=type%>" /></td></tr>
+        <tr><td>Quantity:</td><td><input type="text" name="quantity" value="<%=quantity%>" /></td></tr>
+        <tr><td>Action Taken:</td>
+            <td>
+                <select name="action" >
+                    <option value="novalue">[select one]</option>
+                    <option value="added quantity">Added Quantity</option>
+                    <option value="consumed">Consumed</option>
+                    <option value="borrowed">Borrowed</option>
+                    <option value="missing">Missing</option>
+                    <option value="broken">Broken</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>Unit:</td><td><input type="text" name="amount" size="4" value="<%if(amount==null){out.print("N/A");}else{out.print(amount);}%>" />
+        <select name="unit">
+                   <%try{%>
+                   <%
+                        String novalue= "novalue";
+                        if(unit == null || (unit.equals(novalue))){
+                   %>
+                   <option value="novalue" selected>N/A</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="novalue">N/A</option>
+                      <%}%>
+
+                      <%try{%>
+                      <%
+                        if(unit.equals("Gram/s")){
+                   %>
+                   <option value="Gram/s" selected>Gram/s</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="Gram/s" >Gram/s</option>
                     <%}%>
 
+                    <%try{%>
+                      <%
+                        if(unit.equals("Kilogram/s")){
+                   %>
+                   <option value="Kilogram/s" selected>Kilogram/s</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="Kilogram/s" >Kilogram/s</option>
+                    <%}%>
+
+                    <%try{%>
+                    <%
+                        if(unit.equals("Milliliter/s")){
+                   %>
+                   <option value="Milliliter/s" selected>Milliliter/s</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="Milliliter/s">Milliliter/s</option>
+                    <%}%>
+
+                    <%try{%>
+                    <%
+                        if(unit.equals("Liter/s")){
+                   %>
+                   <option value="Liter/s" selected>Liters</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="Liter/s">Liters</option>
+                    <%}%>
+                    <%try{%>
+                    <%
+                        if(unit.equals("Gallon/s")){
+                   %>
+                   <option value="Gallon/s" selected>Gallon/s</option>
+                    <%}
+                      }
+                      catch(Exception e)
+                      {%>
+                      <option value="Gallon/s">Gallon/s</option>
+                    <%}%>
+                </select>
+        </td></tr>
+<%}%>
                     </select></td></tr>
-    <br/>
-    </table>
-    <br/>
+                    <br/>
+                    </table>
+                    <br/>
+                    Confirm Changes?
+                    <br/>
+                    <input type="submit" value="Yes"/>
     <input type="submit" value="Save Changes"/>
 </form>
 </center>
@@ -493,9 +480,9 @@ Released   : 20090617
         <%stat=(String) session.getAttribute("status");
           if(stat.equals("admin")){
        %>
-                                                            <li><jsp:include page="DisplayAdminNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayAdminNotificationView.jsp" /></li>
                                                             <%} else{%>
-                                                            <li><jsp:include page="DisplayNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayNotificationView.jsp" /></li>
                                                             <%}%>
                                                         </ul>
                                 </div>
