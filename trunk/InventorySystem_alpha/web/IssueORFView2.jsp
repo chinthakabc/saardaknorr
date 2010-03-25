@@ -11,8 +11,8 @@ Released   : 20090617
 
 -->
 <%
-   String s= (String) session.getAttribute("username");
-   if(s==null)
+   String s2= (String) session.getAttribute("username");
+   if(s2==null)
     %><jsp:forward page="index.jsp"/><%
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -108,9 +108,6 @@ Released   : 20090617
 		<div id="content">
                     <p align="right">
                         <a href="main.jsp"><img src="home_button.jpg" height="50" title="Home"></img></a> <a href="LogoutController.jsp"><img src="delete.png" height="35" title="Logout"></img></a></p>
-                                       <%
-    java.util.List supplies = inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
-%>
 <center>
 <h2>Issue Order Request Form</h2>
 <br/>
@@ -131,7 +128,7 @@ Released   : 20090617
         }
         </script>
         <%
-        java.util.List allSupplies=inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
+        //java.util.List allSupplies=inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
         int total=0;
         for(i=1; i<11; i++){
         String s=request.getParameter("supplyname"+i);
@@ -171,16 +168,13 @@ Released   : 20090617
                                 <div>
                                     <h2>Notifications</h2>
 							<ul>
-                                                             <%
-   loggedin= (String) session.getAttribute("username");
-   if(loggedin==null) loggedin="Guest";
-%>
-        <%stat=(String) session.getAttribute("status");
+       <%
+        stat=(String) session.getAttribute("status");
           if(stat.equals("admin")){
        %>
-                                                            <li><jsp:include page="DisplayAdminNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayAdminNotificationView.jsp" /></li>
                                                             <%} else{%>
-                                                            <li><jsp:include page="DisplayNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayNotificationView.jsp" /></li>
                                                             <%}%>
                                                         </ul>
                                 </div>
