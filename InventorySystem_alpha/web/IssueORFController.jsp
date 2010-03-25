@@ -7,8 +7,9 @@
         String dt= date.toString();
         boolean con1=inventorysystem.dao.ORFPeer.addORF(id, dt);
         if(con1==true){
-            int orfID=inventorysystem.dao.ORFPeer.retrieveORF(dt,id).getORF_ID();
+            int orfID=inventorysystem.dao.ORFPeer.getORF(dt,id).getORF_ID();
             boolean con2= false;
+            int count=0;
             for(int i=1; i<11; i++){
                 String s=request.getParameter("supplyname"+i);
                 if(!(s==null)){
@@ -18,22 +19,40 @@
                     String supplyPrice=(String)request.getParameter("price"+i);
                     String supplyAmount=(String)request.getParameter("unitval"+i);
                     String supplyUnit=(String)request.getParameter("unit"+i);
-                    con2 = inventorysystem.dao.ORF_SupplyPeer.addORFSupply(orfID, id, supplyName, supplyQuantity, supplyAmount, supplyUnit, supplyPrice);
+                    String supplyType="reagents";
+                    con2 = inventorysystem.dao.ORF_SupplyPeer.addORFSupply(orfID, id, supplyType, supplyName, supplyQuantity, supplyPrice, supplyUnit, supplyAmount);
+                    if(con2==false){
+                        count++;
+                    }
                 }
-
             }
-            
-            if(con2==true){
-                %><center>Successfully Issued.<br/></center>
-                <jsp:include page="IssueORFView.jsp"/><%
+            if(count==0){
+                %>
+            <script type="text/javascript">
+            <!--
+            alert("Successfully Issued.");
+            window.location="http://localhost:8080/InventorySystem/IssueORFView.jsp";
+            //-->
+            </script><%
             }
             else{
-                %><center>Failed to Issue ORF.2<br/></center>
-                <jsp:include page="IssueORFView.jsp"/><%
+                %>
+                            <script type="text/javascript">
+            <!--
+            alert("Failed to Issue ORF");
+            window.location="http://localhost:8080/InventorySystem/EditSupplyView.jsp";
+            //-->
+            </script>
+            <%
             }
         }else{
-            %><center>Failed to Issue ORF.1<br/></center>
-            <jsp:include page="IssueORFView.jsp"/><%
+            %>
+                        <script type="text/javascript">
+            <!--
+            alert("Failed to Issue ORF");
+            window.location="http://localhost:8080/InventorySystem/EditSupplyView.jsp";
+            //-->
+            </script><%
         }
    }else{
         %><jsp:forward page="main.jsp"/><%

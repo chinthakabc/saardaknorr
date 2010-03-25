@@ -108,9 +108,6 @@ Released   : 20090617
 		<div id="content">
                     <p align="right">
                         <a href="main.jsp"><img src="home_button.jpg" height="50" title="Home"></img></a> <a href="LogoutController.jsp"><img src="delete.png" height="35" title="Logout"></img></a></p>
-  <%
-    java.util.List supplies = inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
-%>
 <center>
 <h2>Issue Order Request Form</h2>
 <br/>
@@ -131,10 +128,22 @@ Released   : 20090617
         }
         </script>
         <%
-        java.util.List allSupplies=inventorysystem.dao.SupplyPeer.retrieveAllSupplies();
+        String dv=(String) session.getAttribute("division");
+        if(dv.equals("General Chemistry and Chemical Education")){
+        java.util.List allSupplies=inventorysystem.dao.Supply_GenChemPeer.retrieveAllSupplies();
+        if (allSupplies.isEmpty()){
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
+            }
         for(i=1; i<11; i++){%>
             <tr>
-                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1" onfocus="startCalc();" onblur="stopCalc();"/></td>
+                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1"/></td>
                 <td><input type="text" name="unitval<%=i%>" maxlength="2" size="1" onkeypress="return onlyNumbers();"/></td>
                 <td><select name="unit<%=i%>" class="pretext2" id = "input2">
                     <option value="n/a">N/A</option>
@@ -146,14 +155,141 @@ Released   : 20090617
                     <select name="supplyname<%=i%>" class="pretext2" id="input3">
                     <option value="novalue">[select one]</option>
                     <%for(j=0;j<allSupplies.size();j++){
-                    inventorysystem.dao.Supply supply= (inventorysystem.dao.Supply) allSupplies.get(j);%>
+                    inventorysystem.dao.Supply_GenChem supply= (inventorysystem.dao.Supply_GenChem) allSupplies.get(j);%>
                     <option value="<%=supply.getName()%>"><%=supply.getName().toUpperCase()%></option>
                     <%}%>
                     </select>
                 </td>
-                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();" onfocus="startCalc();" onblur="stopCalc();"/></td>
+                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();"/></td>
                 </tr>
-        <%}%>
+        <%}
+        }else if(dv.equals("Biochemistry and Agricultural Chemistry")){
+        java.util.List allSupplies=inventorysystem.dao.Supply_BioChemPeer.retrieveAllSupplies();
+        for(i=1; i<11; i++){%>
+            <tr>
+                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1"/></td>
+                <td><input type="text" name="unitval<%=i%>" maxlength="2" size="1" onkeypress="return onlyNumbers();"/></td>
+                <td><select name="unit<%=i%>" class="pretext2" id = "input2">
+                    <option value="n/a">N/A</option>
+                    <option value="gram">g</option>
+                    <option value="kilogram">kg</option>
+                    <option value="milliliter">mL</option>
+                    <option value="liter">L</option></select></td>
+                <td>
+                    <select name="supplyname<%=i%>" class="pretext2" id="input3">
+                    <option value="novalue">[select one]</option>
+                    <%for(j=0;j<allSupplies.size();j++){
+                    inventorysystem.dao.Supply_BioChem supply= (inventorysystem.dao.Supply_BioChem) allSupplies.get(j);%>
+                    <option value="<%=supply.getName()%>"><%=supply.getName().toUpperCase()%></option>
+                    <%}%>
+                    </select>
+                </td>
+                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();"/></td>
+                </tr>
+        <%}
+        }else if(dv.equals("Analytical and Environmental Chemistry")){
+        java.util.List allSupplies=inventorysystem.dao.Supply_AnaChemPeer.retrieveAllSupplies();
+        if (allSupplies.isEmpty()){
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
+            }
+        for(i=1; i<11; i++){%>
+            <tr>
+                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1"/></td>
+                <td><input type="text" name="unitval<%=i%>" maxlength="2" size="1" onkeypress="return onlyNumbers();"/></td>
+                <td><select name="unit<%=i%>" class="pretext2" id = "input2">
+                    <option value="n/a">N/A</option>
+                    <option value="gram">g</option>
+                    <option value="kilogram">kg</option>
+                    <option value="milliliter">mL</option>
+                    <option value="liter">L</option></select></td>
+                <td>
+                    <select name="supplyname<%=i%>" class="pretext2" id="input3">
+                    <option value="novalue">[select one]</option>
+                    <%for(j=0;j<allSupplies.size();j++){
+                    inventorysystem.dao.Supply_AnaChem supply= (inventorysystem.dao.Supply_AnaChem) allSupplies.get(j);%>
+                    <option value="<%=supply.getName()%>"><%=supply.getName().toUpperCase()%></option>
+                    <%}%>
+                    </select>
+                </td>
+                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();"/></td>
+                </tr>
+        <%}
+        }else if(dv.equals("Physical and Inorganic Chemistry")){
+        java.util.List allSupplies=inventorysystem.dao.Supply_PhyChemPeer.retrieveAllSupplies();
+        if (allSupplies.isEmpty()){
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
+            }
+        for(i=1; i<11; i++){%>
+            <tr>
+                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1"/></td>
+                <td><input type="text" name="unitval<%=i%>" maxlength="2" size="1" onkeypress="return onlyNumbers();"/></td>
+                <td><select name="unit<%=i%>" class="pretext2" id = "input2">
+                    <option value="n/a">N/A</option>
+                    <option value="gram">g</option>
+                    <option value="kilogram">kg</option>
+                    <option value="milliliter">mL</option>
+                    <option value="liter">L</option></select></td>
+                <td>
+                    <select name="supplyname<%=i%>" class="pretext2" id="input3">
+                    <option value="novalue">[select one]</option>
+                    <%for(j=0;j<allSupplies.size();j++){
+                    inventorysystem.dao.Supply_PhyChem supply= (inventorysystem.dao.Supply_PhyChem) allSupplies.get(j);%>
+                    <option value="<%=supply.getName()%>"><%=supply.getName().toUpperCase()%></option>
+                    <%}%>
+                    </select>
+                </td>
+                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();"/></td>
+                </tr>
+        <%}
+        }else{
+        java.util.List allSupplies=inventorysystem.dao.Supply_OrgChemPeer.retrieveAllSupplies();
+        if (allSupplies.isEmpty()){
+            %>
+            <script type="text/javascript">
+            <!--
+            alert("No supplies yet.");
+            window.location="http://localhost:8080/InventorySystem/main.jsp";
+            //-->
+            </script>
+            <%
+            }
+        for(i=1; i<11; i++){%>
+            <tr>
+                <td><input type="text" name="quantity<%=i%>" onkeypress="return onlyNumbers();" maxlength="3" size="1"/></td>
+                <td><input type="text" name="unitval<%=i%>" maxlength="2" size="1" onkeypress="return onlyNumbers();"/></td>
+                <td><select name="unit<%=i%>" class="pretext2" id = "input2">
+                    <option value="n/a">N/A</option>
+                    <option value="gram">g</option>
+                    <option value="kilogram">kg</option>
+                    <option value="milliliter">mL</option>
+                    <option value="liter">L</option></select></td>
+                <td>
+                    <select name="supplyname<%=i%>" class="pretext2" id="input3">
+                    <option value="novalue">[select one]</option>
+                    <%for(j=0;j<allSupplies.size();j++){
+                    inventorysystem.dao.Supply_OrgChem supply= (inventorysystem.dao.Supply_OrgChem) allSupplies.get(j);%>
+                    <option value="<%=supply.getName()%>"><%=supply.getName().toUpperCase()%></option>
+                    <%}%>
+                    </select>
+                </td>
+                    <td><input type="text" name="price<%=i%>" maxlength="7" size="2" onkeypress="return onlyNumbers();"/></td>
+                </tr>
+        <%}
+        }%>
     </table>
     <br/>
     <input type="submit" value="Issue ORF"/>
@@ -168,16 +304,13 @@ Released   : 20090617
                                 <div>
                                     <h2>Notifications</h2>
 							<ul>
-                                                             <%
-   loggedin= (String) session.getAttribute("username");
-   if(loggedin==null) loggedin="Guest";
-%>
-        <%stat=(String) session.getAttribute("status");
+<%
+           stat=(String) session.getAttribute("status");
           if(stat.equals("admin")){
        %>
-                                                            <li><jsp:include page="DisplayAdminNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayAdminNotificationView.jsp" /></li>
                                                             <%} else{%>
-                                                            <li><jsp:include page="DisplayNotificationView.jsp" /></li>
+                                                            <li><//jsp:include page="DisplayNotificationView.jsp" /></li>
                                                             <%}%>
                                                         </ul>
                                 </div>
